@@ -1,4 +1,4 @@
-# Histogram-of-an-images
+# Ex.No 3: Histogram-of-an-images
 ## Aim
 To obtain a histogram for finding the frequency of pixels in an Image with pixel values ranging from 0 to 255. Also write the code using OpenCV to perform histogram equalization.
 
@@ -12,6 +12,8 @@ Read the gray and color image using imread()
 ### Step2:
 Print the image using imshow().
 
+
+
 ### Step3:
 Use calcHist() function to mark the image in graph frequency for gray and color image.
 
@@ -23,74 +25,70 @@ The Histogram of gray scale image and color image is shown.
 
 
 ## Program:
-```
-# Developed By: THARIKA S 
+```python
+# Developed By: THARIKA S
 # Register Number: 212222230159
 
-
-!pip install opencv-python
+### Input Grayscale Image and Color Image
 
 import cv2
 import matplotlib.pyplot as plt
-gray_image = cv2.imread('gray_image.jpeg')
-color_image = cv2.imread('color_image.jpg')
-cv2.imshow("Gray image",gray_image)
-cv2.imshow("color image",color_image)
+flower = cv2.imread("image1.webp")
+grayscale_image = cv2.cvtColor(flower, cv2.COLOR_BGR2GRAY)
+cv2.imshow("Color Image", flower)
+cv2.imshow("Gray Image", grayscale_image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-import numpy as np
-gray_image=cv2.imread('gray_image.jpeg')
+### Histogram of Grayscale Image and any channel of Color Image
+
 import matplotlib.pyplot as plt 
-gray_hist=cv2.calcHist(gray_image,[0],None,[255],[0,255])
+hist=cv2.calcHist(grayscale_image,[0],None,[255],[0,255])
 plt.figure()
-plt.imshow(gray_image)
-plt.show()
 plt.title("Histogram")
-plt.xlabel("Grayscale value")
+plt.xlabel("pixel value")
 plt.ylabel("pixel count")
-plt.stem(gray_hist)
+plt.plot(hist)
 plt.show()
 
-import numpy as np
-color_image=cv2.imread('color_image.jpg')
-import matplotlib.pyplot as plt 
-color_hist=cv2.calcHist(color_image,[0],None,[255],[0,255])
-plt.figure()
-plt.imshow(color_image)
-plt.show()
-plt.title("Histogram")
-plt.xlabel("Colorscale value")
-plt.ylabel("pixel count")
-plt.stem(color_hist)
-plt.show()
+### Histogram Equalization of Grayscale Image.
 
-import cv2
-gray_image = cv2.imread("gray_image.jpeg",0)
-cv2.imshow('Grey Scale Image',gray_image)
-equ = cv2.equalizeHist(gray_image)
-cv2.imshow("Equalized Image",equ)
+gray_resized = cv2.resize(grayscale_image, (500, 400))
+equalized_image = cv2.equalizeHist(gray_resized)
+cv2.imshow("Original Grayscale Image", gray_resized)
+cv2.imshow("Equalized Grayscale Image", equalized_image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+plt.figure()
+plt.title("Equalized Grayscale Image Histogram")
+plt.xlabel("Pixel Value")
+plt.ylabel("Pixel Count")
+hist_equalized = cv2.calcHist([equalized_image], [0], None, [256], [0, 256])
+plt.plot(hist_equalized)
+plt.show()
+
+
 ```
 ## Output:
 ### Input Grayscale Image and Color Image
-![image](https://github.com/user-attachments/assets/1d75cf71-cb44-47e0-b206-3b825f80d149)
-![image](https://github.com/user-attachments/assets/c56c02ad-30c7-450f-a192-1867c1c18f2a)
+
+![image](https://github.com/user-attachments/assets/c607d68a-24be-491c-a8db-3a6f8144a085)
+
+![image](https://github.com/user-attachments/assets/03cd989d-37dc-41e5-841c-1eabcfca1524)
 
 
 ### Histogram of Grayscale Image and any channel of Color Image
-![image](https://github.com/user-attachments/assets/e4f7c0f9-a2fc-4245-b60f-0ab6d51b737c)
 
-![image](https://github.com/user-attachments/assets/7ae17351-df74-4212-9d53-24e04aff2fb8)
+![image](https://github.com/user-attachments/assets/16e4ae95-f9a9-4a6c-b15b-1a7be9ac0511)
 
 
 ### Histogram Equalization of Grayscale Image.
-![image](https://github.com/user-attachments/assets/2339f1d9-57fc-4acd-ab07-1810f7d508f0)
 
-![image](https://github.com/user-attachments/assets/b030a54b-562e-4cd3-9738-f7af0f2fa46a)
+![image](https://github.com/user-attachments/assets/f1104fc6-9e14-4e61-9520-044dfc3e5922)
 
+![image](https://github.com/user-attachments/assets/ed5c8e8b-e25b-419a-b5df-36e44cf36c4f)
 
+![image](https://github.com/user-attachments/assets/6cde1434-8c7b-433c-b9b6-676ff6cd999f)
 
 ## Result: 
 Thus the histogram for finding the frequency of pixels in an image with pixel values ranging from 0 to 255 is obtained. Also,histogram equalization is done for the gray scale image using OpenCV.
